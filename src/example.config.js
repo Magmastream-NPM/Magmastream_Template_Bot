@@ -3,10 +3,10 @@ module.exports = {
   clientId: "",
   nodes: [
     {
-      host: "0.0.0.0",
+      host: "localhost",
       identifier: "Local",
-      port: 25037,
-      password: "thepassoflavalink",
+      port: 25033,
+      password: "youshallnotpass",
       retryAmount: 1000,
       retrydelay: 10000,
       resumeStatus: true,

@@ -17,9 +17,8 @@
   },
   "homepage": "https://github.com/Blackfort-Hosting/Magmastream_Template_Bot#readme",
   "dependencies": {
-    "discord.js": "^14.11.0",
-    "fs": "^0.0.1-security",
-    "magmastream": "^2.1.0",
+    "discord.js": "^14.14.1",
+    "magmastream": "^2.4.0",
     "signale": "^1.4.0"
   }
 }
