@@ -1,10 +1,13 @@
 {
   "name": "magmastream_template_bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An example of how Magmastream can be implemented.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node index.js"
+    "dev": "tsc --watch",
+    "build": "tsc --build",
+    "start": "node dist/index.js",
+    "rebuild": "npm run build && npm run start"
   },
   "repository": {
     "type": "git",
@@ -17,8 +20,13 @@
   },
   "homepage": "https://github.com/Blackfort-Hosting/Magmastream_Template_Bot#readme",
   "dependencies": {
-    "discord.js": "^14.14.1",
-    "magmastream": "^2.4.0",
+    "discord.js": "^14.15.2",
+    "magmastream": "^2.5.5",
     "signale": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.13.0",
+    "@types/signale": "^1.4.7",
+    "typescript": "^5.4.5"
   }
 }

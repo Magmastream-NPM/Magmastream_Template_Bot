@@ -1,4 +1,4 @@
-module.exports = {
+export = {
   token: "",
   clientId: "",
   nodes: [

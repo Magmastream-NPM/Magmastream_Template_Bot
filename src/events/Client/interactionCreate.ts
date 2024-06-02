@@ -1,8 +1,12 @@
-const { InteractionType } = require("discord.js");
+import { CommandInteraction, InteractionType } from "discord.js";
+import MagmastreamTemplateBot from "../../structures/Client";
 
-module.exports = {
+export = {
   name: "interactionCreate",
-  run: async (client, interaction) => {
+  run: async (
+    client: MagmastreamTemplateBot,
+    interaction: CommandInteraction
+  ) => {
     if (interaction.type === InteractionType.ApplicationCommand) {
       const slashCommand = client.slashCommands.get(interaction.commandName);
       if (slashCommand) {

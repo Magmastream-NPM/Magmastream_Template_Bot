@@ -1,3 +1,6 @@
+import { ChatInputCommandInteraction } from "discord.js";
+import MagmastreamTemplateBot from "../structures/Client";
+
 module.exports = {
   name: "play",
   description: "Plays a song",
@@ -9,28 +12,35 @@ module.exports = {
       type: 3,
     },
   ],
-  run: async (client, interaction) => {
+  run: async (
+    client: MagmastreamTemplateBot,
+    interaction: ChatInputCommandInteraction
+  ) => {
+    if (!interaction.guild || !interaction.guildId) return;
     if (!interaction.replied || interaction.deferred) {
       await interaction.deferReply({
         ephemeral: false,
       });
     }
 
-    const query = interaction.options.getString("query");
+    const query = interaction.options.getString("query", true);
+    const member = interaction.guild.members.cache.get(interaction.user.id);
 
-    if (!interaction.member.voice.channelId) {
+    if (!member) return;
+
+    if (!member.voice.channelId) {
       return await interaction.editReply({
         content: "You must be in a voice channel to use this command.",
       });
     }
 
     const botCurrentVoiceChannelId =
-      interaction.guild?.members.me?.voice.channelId;
+      interaction.guild.members.me?.voice.channelId;
 
     if (
       botCurrentVoiceChannelId &&
-      interaction.member.voice.channelId &&
-      interaction.member.voice.channelId !== botCurrentVoiceChannelId
+      member.voice.channelId &&
+      member.voice.channelId !== botCurrentVoiceChannelId
     ) {
       return await interaction.editReply({
         content: `You must be connnected to the same voice channel as me to use this command. <#${botCurrentVoiceChannelId}>`,
@@ -40,7 +50,7 @@ module.exports = {
     const player = client.manager.create({
       guild: interaction.guildId,
       textChannel: interaction.channelId,
-      voiceChannel: interaction.member?.voice.channelId,
+      voiceChannel: member.voice.channelId,
       selfDeafen: true,
       volume: 100,
     });
